@@ -1,0 +1,174 @@
+@use '../config' as *;
+@use '../variables' as *;
+@use '../shared' as *;
+
+
+
+body {
+  overflow-x: hidden;
+
+  h1 {
+    font-weight: $bold;
+  }
+}
+
+.nav-is-active {
+  overflow-y: hidden;
+  padding-right: 15px;
+}
+
+@mixin dropDownActive() {
+  @include icon($fa-var-chevron-up,10px,after)
+}
+
+
+.sidebar {
+  font-size: 16px;
+  backdrop-filter: blur(4px);
+  filter: blur(0);
+
+  .dropdown {
+    button {
+      @include flex(row,1rem);
+      align-items: center;
+      @include icon($fa-var-chevron-down,10px,after);
+    }
+
+    &-content {
+      font-size: 14px;
+      @include flex(column,1rem);
+      @mixin icons($order,$name) {
+        > :nth-child(#{$order}) {
+          @include icon($name,20px,before);
+        }
+      }
+
+      &.icons {
+        @include icons(1,$fa-var-note-sticky);
+        @include icons(2,$fa-var-calendar);
+        @include icons(3,$fa-var-marker);
+        @include icons(4,$fa-var-highlighter);
+
+        li {
+          @include flex(row,1rem);
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  .btn-wrapper {
+    text-align: center;
+    @include grid(1.5rem 0);
+  }
+}
+
+@media (max-width: 899px) {
+  .sidebar {
+    position: fixed;
+    display: block;
+    inset: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    
+    &-container {
+      background-color: map-get($clr-primary, 300 );
+      width: min(70%,260px);
+      margin-left: auto;
+      height: 100%;
+      padding: 2.5rem;
+      padding-top: 6rem;
+    }
+
+    .list1 {
+      @include flex(column,2rem);
+      margin-bottom: 3rem;
+    }
+
+    .dropdown {
+      &-content {
+        height: 0;
+        overflow: hidden;
+        margin: 1rem 0 0 3rem;
+      }
+
+      &.active {
+        button {
+          @include dropDownActive();
+        }
+
+        .dropdown-content {
+          height: initial;
+        }
+      }
+    }
+
+    .btn-wrapper {
+      button {
+        width: 100%;
+      }
+
+      .primary-btn {
+        background-color: map-get($clr-neutral, 100 );
+        color: map-get($clr-primary, 300 );
+        @include hover(background-color,$clr-primary,100);
+        @include hover(color,$clr-neutral,100);
+      }
+    }
+  }
+}
+
+@media (min-width: 900px) {
+  .sidebar {
+    display: block;
+    opacity: 1;
+    visibility: initial;
+    flex: 1;
+    
+    &-container {
+      justify-content: space-between;
+      @include flex(row,0);
+      align-items: center
+    }
+
+    .list1 {
+      @include flex(row,2.5rem);
+      margin-left: 5rem;
+    }
+
+    .dropdown {
+      position: relative;
+      @include flex(row,0);
+      justify-content: center;
+    
+      &-content {
+        top: 2.4rem;
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+        box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+        background-color: map-get($clr-primary, 300 );
+        padding: 2rem;
+        border-radius: 6px;
+        white-space: nowrap;
+      }
+
+      &:hover {
+        .dropdown-content {
+          opacity: 1;
+          visibility: visible;
+          animation: fadeIn 1s;
+        }
+
+        button {
+          @include dropDownActive();
+        }
+      }
+    }
+
+    .btn-wrapper {
+      @include flex(row,2rem);
+      align-items: center;
+    }
+  }
+}

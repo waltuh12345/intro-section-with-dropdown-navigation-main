@@ -1,0 +1,45 @@
+@use '../abstract/config' as *;
+.border {
+  border: 1px solid red;
+  > * {
+    border: 1px solid rgb(0, 255, 94);
+  }
+}
+
+.desktop {
+  display: none;
+}
+
+@media (min-width: 899px) {
+  .desktop {
+    display: block;
+  }
+
+  .mobile {
+    display: none;
+  }
+}
+
+.primary-btn {
+  display: block;
+  padding: 0.9rem 1rem;
+  border-radius: 9999px;
+  width: 160px;
+  background-color: map-get($clr-neutral, 100 );
+  color: map-get($clr-primary, 300 );
+
+  @include hover(background-color,$clr-neutral,200);
+  @include hover(color,$clr-primary,400);
+  font-weight: $bold;
+}
+
+.hide {
+  opacity: 0;
+  visibility: hidden;
+  transition: 1s;
+}
+
+.scroll-disabled {
+  overflow-y: hidden;
+  padding-right: 15px;
+}
