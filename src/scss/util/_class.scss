@@ -1,0 +1,241 @@
+.border {
+  border: 2px solid red;
+  > * {
+    border: 2px solid green;
+  }
+}
+
+.container {
+  width: min(90%, 900px);
+  margin-inline: auto;
+}
+
+.border-box {
+  padding: 1rem;
+  border: 2px solid var(--text);
+}
+
+.center-vertical {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.center-vh {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.reset-btn {
+  background: none;
+  cursor: pointer;
+  color: inherit;
+  padding: 0;
+  border: none;
+}
+
+.hide-scrollbar {
+  overflow-y: hidden;
+}
+
+@media (min-width: 500px) {
+  .hide-scrollbar {
+    padding-right: 8px;
+  }
+}
+
+/* Style the scrollbar track */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+/* Style the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
+
+/* Style the scrollbar thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+/* Style the scrollbar corner */
+::-webkit-scrollbar-corner {
+  background-color: #f1f1f1;
+}
+
+/* Style the scrollbar track when scrollbar is in "dragging" state */
+::-webkit-scrollbar-thumb:active {
+  background-color: #333;
+}
+
+/* Set the width of the scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* The switch - the box around the slider */
+.toggle-theme {
+  font-size: 17px;
+  position: relative;
+  display: inline-block;
+  width: 2.8em;
+  height: 1.5em;
+
+  & input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  /* The slider */
+  .slider {
+    --background: #28096b;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--background);
+    transition: 0.5s;
+    border-radius: 30px;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 1em;
+    width: 1em;
+    border-radius: 50%;
+    left: 14%;
+    bottom: 15%;
+    box-shadow: inset 7px -1px 0px 0px #fff000;
+    background: var(--background);
+    transition: 0.5s;
+  }
+
+  input:checked + .slider {
+    background-color: #522ba7;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(18px);
+    box-shadow: inset 15px -4px 0px 15px #fff000;
+  }
+}
+
+.loading-wrapper {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(6px);
+  filter: blur(0);
+
+  .three-body {
+    --uib-size: 35px;
+    --uib-speed: 0.8s;
+    --uib-color: #5d3fd3;
+    position: relative;
+    display: inline-block;
+    height: var(--uib-size);
+    width: var(--uib-size);
+    animation: spin78236 calc(var(--uib-speed) * 2.5) infinite linear;
+
+    &__dot {
+      position: absolute;
+      height: 100%;
+      width: 30%;
+    }
+
+    &__dot:after {
+      content: "";
+      position: absolute;
+      height: 0%;
+      width: 100%;
+      padding-bottom: 100%;
+      background-color: var(--uib-color);
+      border-radius: 50%;
+    }
+
+    &__dot:nth-child(1) {
+      bottom: 5%;
+      left: 0;
+      transform: rotate(60deg);
+      transform-origin: 50% 85%;
+    }
+
+    &__dot:nth-child(1)::after {
+      bottom: 0;
+      left: 0;
+      animation: wobble1 var(--uib-speed) infinite ease-in-out;
+      animation-delay: calc(var(--uib-speed) * -0.3);
+    }
+
+    &__dot:nth-child(2) {
+      bottom: 5%;
+      right: 0;
+      transform: rotate(-60deg);
+      transform-origin: 50% 85%;
+    }
+
+    &__dot:nth-child(2)::after {
+      bottom: 0;
+      left: 0;
+      animation: wobble1 var(--uib-speed) infinite
+        calc(var(--uib-speed) * -0.15) ease-in-out;
+    }
+
+    &__dot:nth-child(3) {
+      bottom: -5%;
+      left: 0;
+      transform: translateX(116.666%);
+    }
+
+    &__dot:nth-child(3)::after {
+      top: 0;
+      left: 0;
+      animation: wobble2 var(--uib-speed) infinite ease-in-out;
+    }
+
+    @keyframes spin78236 {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes wobble1 {
+      0%,
+      100% {
+        transform: translateY(0%) scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: translateY(-66%) scale(0.65);
+        opacity: 0.8;
+      }
+    }
+
+    @keyframes wobble2 {
+      0%,
+      100% {
+        transform: translateY(0%) scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: translateY(66%) scale(0.65);
+        opacity: 0.8;
+      }
+    }
+  }
+}

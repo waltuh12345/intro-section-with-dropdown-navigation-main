@@ -1,0 +1,63 @@
+//=====COLORS======//
+:root {
+  --clr-bg: #121212;
+  --clr-text: #ffffff;
+  --clr-primary: #89d7f3;
+  --clr-neutral: #f1d39d;
+  --clr-err: #cf6679;
+}
+
+//=========MIXINS==========//
+@mixin overlay() {
+  background-color: var(--clr-bg);
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--clr-text);
+    opacity: 0.1;
+  }
+}
+
+@mixin flex($fd, $gap) {
+  display: flex;
+  flex-direction: $fd;
+  gap: $gap;
+}
+
+@mixin hovered($clr) {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: $clr;
+    }
+  }
+}
+
+@mixin clicked($clr) {
+  &:active {
+    color: $clr;
+  }
+}
+
+//=========FONTS=========//
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+$ff: "Montserrat", sans-serif;
+$heading: clamp(1.31rem, calc(-0.94rem + 11.25vw), 1.88rem);
+$sub-heading: clamp(1.13rem, calc(-0.62rem + 8.75vw), 1.56rem);
+
+$regular: 400;
+$medium: 500;
+$semibold: 600;
+$bold: 700;
+
+h1 {
+  font-size: $heading;
+}
+
+h2 {
+  font-size: $sub-heading;
+}
+
+//======STYLES=====//
