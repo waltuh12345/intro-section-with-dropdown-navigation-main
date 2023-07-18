@@ -1,0 +1,33 @@
+@use "../util" as *;
+
+body {
+  background-color: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: $ff;
+  font-size: 16px;
+  font-weight: $medium;
+  overflow-x: hidden;
+}
+
+button {
+  @extend .reset-btn;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#menu-toggle {
+  @include icon($fa-var-bars);
+  font-size: 24px;
+  z-index: 3;
+
+  &.active {
+    @include icon($fa-var-close);
+  }
+}
+
+#dropdown {
+  @include flex(column, 1.4rem);
+}

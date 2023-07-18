@@ -1,0 +1,87 @@
+@use "../util" as *;
+
+h1 {
+  font-weight: $semibold;
+}
+
+.main-content {
+  display: flex;
+  gap: 2.5rem 0;
+  flex-direction: column;
+  padding: 2rem 0;
+  min-height: 80vh;
+  justify-content: center;
+
+  article {
+    text-align: center;
+    > * {
+      padding: 1em 0;
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 0.5rem 1rem;
+  }
+}
+
+@media (height >= 844px) {
+  .main-content {
+    min-height: 90vh;
+  }
+}
+
+@media (min-width: 600px) {
+  .container {
+    width: min(93%, 1000px);
+  }
+
+  .main-content {
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    gap: 0 0.5rem;
+
+    picture {
+      animation: fadeInRight 800ms;
+      flex: 0 1.5 26rem;
+    }
+
+    article {
+      text-align: initial;
+      flex: 0 1 24rem;
+      animation: fadeInLeft 1s;
+    }
+
+    h1 {
+      font-size: $sub-heading;
+    }
+
+    p {
+      font-size: clamp(0.81rem, calc(0.37rem + 1.19vw), 0.94rem);
+    }
+
+    .primary-btn {
+      font-size: 14px;
+      animation: rubberBand 800ms;
+      animation-delay: 3s;
+    }
+
+    ul {
+      > :nth-child(1) {
+        animation: fadeInLeft 600ms;
+      }
+      > :nth-child(2) {
+        animation: fadeInLeft 1100ms;
+      }
+      > :nth-child(3) {
+        animation: fadeInLeft 1600ms;
+      }
+      > :nth-child(4) {
+        animation: fadeInLeft 2100ms;
+      }
+    }
+  }
+}
