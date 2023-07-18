@@ -1,0 +1,16 @@
+@use "../util" as *;
+nav {
+  @include flex(row, 0);
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  min-height: 4.4rem;
+
+  .logo {
+    margin-bottom: -0.5rem;
+  }
+}
+
+aside {
+  display: none;
+}

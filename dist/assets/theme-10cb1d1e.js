@@ -1,0 +1,1 @@
+const o=document.querySelectorAll(".svg-logo");o.forEach(r=>{const c=r.getAttribute("src");fetch(c).then(e=>e.text()).then(e=>{const t=new DOMParser().parseFromString(e,"image/svg+xml").querySelector("svg");t.style.fill="var(--clr-text)",r.parentNode.replaceChild(t,r)}).catch(e=>{console.error("Error fetching SVG:",e)})});

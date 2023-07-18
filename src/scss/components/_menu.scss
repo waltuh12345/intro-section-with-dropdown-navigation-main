@@ -1,0 +1,131 @@
+@use "../util" as *;
+
+aside {
+  display: none;
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(4px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  z-index: 2;
+}
+
+.menu-container {
+  @include overlay();
+  width: min(70%, 300px);
+  box-shadow: $bs;
+  margin-left: auto;
+  min-height: 100%;
+  border-radius: 8px 0 0 8px;
+
+  .row1 {
+    padding-top: 4.5rem;
+  }
+  section {
+    padding: 1rem 1.5rem;
+  }
+
+  .content {
+    display: none;
+    font-weight: $regular;
+  }
+
+  .wrapper {
+    @include flex(column, 0.5rem);
+    align-items: center;
+  }
+
+  .theme-toggle {
+    @include flex(row, 1rem);
+    align-items: center;
+    justify-content: space-between;
+    border-top: 2px solid var(--clr-transparent);
+    padding-top: 0.8rem;
+    margin-top: 2rem;
+    line-height: 1;
+  }
+
+  .theme-toggle::before {
+    content: "Appearance";
+  }
+}
+
+@media (min-width: $tablet) {
+  .container {
+    width: min(94%, 900px);
+  }
+
+  nav {
+    gap: 0 2em;
+  }
+
+  #menu-toggle {
+    display: none;
+  }
+
+  aside {
+    display: initial;
+    overflow: initial;
+    position: initial;
+    flex: 1;
+  }
+
+  .menu-container {
+    @include overlayRemove;
+    width: 100%;
+    @include flex(row, 0);
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: none;
+
+    > * {
+      padding: 0;
+      margin: 0;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    section {
+      padding: 0;
+    }
+
+    .row1 {
+      padding: 0;
+      animation: fadeInRight 800ms;
+    }
+
+    .row2 {
+      display: flex;
+      gap: 1rem;
+      animation: fadeInRight 800ms;
+    }
+
+    .wrapper {
+      order: 2;
+      flex-direction: row;
+    }
+
+    .primary-btn {
+      width: 6.5em;
+      height: 2.4rem;
+      line-height: 1;
+    }
+
+    .theme-toggle {
+      padding: 0;
+      margin-top: 0;
+      border-top: none;
+      justify-content: initial;
+      gap: initial;
+      flex-direction: initial;
+    }
+
+    .theme-toggle::before {
+      content: initial;
+    }
+  }
+
+  #dropdown {
+    flex-direction: row;
+  }
+}

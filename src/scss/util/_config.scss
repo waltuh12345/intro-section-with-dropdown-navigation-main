@@ -1,0 +1,110 @@
+@use "../util/fa" as *;
+@use "../util/class" as *;
+
+//=====COLORS======//
+:root {
+  --clr-bg: #121212;
+  --clr-text: #ffffff;
+  --clr-primary: #89d7f3;
+  --clr-neutral: #f1d39d;
+  --clr-err: #cf6679;
+  --clr-transparent: rgba(255, 255, 255, 0.1);
+  --surface: rgba(255, 255, 255, 0.1);
+  --surface2: rgba(255, 255, 255, 0.2);
+}
+
+//=========MIXINS==========//
+
+@mixin overlay($opacity: 0.1) {
+  position: relative;
+
+  &::before {
+    background-color: var(--clr-bg);
+    @extend .absolute-bg;
+    z-index: -2;
+  }
+
+  &::after {
+    background-color: var(--clr-text);
+    @extend .absolute-bg;
+    z-index: -1;
+    opacity: $opacity;
+  }
+}
+
+@mixin overlayRemove() {
+  position: initial;
+
+  &::before {
+    background-color: initial;
+  }
+
+  &::after {
+    background-color: initial;
+  }
+}
+
+@mixin flex($fd, $gap) {
+  display: flex;
+  flex-direction: $fd;
+  gap: $gap;
+}
+
+@mixin hovered($clr) {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: $clr;
+    }
+  }
+}
+
+@mixin clicked($clr) {
+  &:active {
+    color: $clr;
+  }
+}
+
+@mixin icon($name) {
+  @include fa-icon();
+  @include fa-icon-solid($name);
+}
+
+@mixin contentIcon($num, $name) {
+  li {
+    @include flex(row, 0.6em);
+    align-items: center;
+  }
+
+  > :nth-child(#{$num}) i {
+    display: block;
+    @include fa-icon();
+    @include fa-icon-regular($name);
+    font-size: 22px;
+  }
+}
+
+//=========FONTS=========//
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+$ff: "Montserrat", sans-serif;
+$heading: clamp(1.31rem, calc(-0.94rem + 11.25vw), 1.88rem);
+$sub-heading: clamp(1.13rem, calc(-0.62rem + 8.75vw), 1.56rem);
+
+$regular: 400;
+$medium: 500;
+$semibold: 600;
+$bold: 700;
+
+h1 {
+  font-size: $heading;
+}
+
+h2 {
+  font-size: $sub-heading;
+}
+
+//======STYLES=====//
+$bs: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+  rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+  rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+
+$tablet: 790px;
